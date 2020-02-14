@@ -299,23 +299,23 @@ end
 end
 
 def player_with_most_of(statistic)
-  player_id = nil
+  player_ID = nil
   stat_total = 0
   game_hash.each do |_team, game_data|
     game_data[:players].each do |basketball_player|
       if basketball_player[statistic].is_a? String
         if basketball_player[statistic].length > stat_total
           stat_total = basketball_player[statistic].length
-          player_name = basketball_player[:player_name]
+          player_ID = basketball_player[:player_name]
         end
       elsif basketball_player[statistic] > stat_total
         stat_total = basketball_player[statistic]
-        player_name = basketball_player[:player_name]
+        player_ID = basketball_player[:player_name]
       end
     end
   end
 
-  player_name
+  player_ID
 end
 
 def most_points_scored
