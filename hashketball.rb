@@ -174,11 +174,17 @@ end
 end
 
 def team_colors(team_name)
+
 game_hash.each do |place, team|
+  
   if team[:team_name] == team_name
+    
     return team[:colors]
+  
   end
+
 end
+
 end
 
 def team_names
@@ -197,56 +203,93 @@ end
 
 
 def player_numbers(team_name)
+
 nums = []
+
 game_hash.each do |place, team|
+  
   if team[:team_name] == team_name
+    
     team.each do |attribute, data|
+      
       if attribute == :players
+        
         data.each do |player|
+          
           nums << player[:number]
+        
         end
+      
       end
+    
     end
+  
   end
+
 end
+
 nums
+
 end
 
 
 def player_stats(player_name)
+
 new_hash = {}
+
 game_hash.each do |place, team|
+  
   team[:players].each do |statistics|
+    
     if statistics[:player_name] == player_name
+      
       statistics.delete(:player_name)
+      
       new_hash = statistics
+    
     end
+  
   end
+
 end
+  
   new_hash
+
 end
 
 
 def big_shoe_rebounds
-  shoes = 0
-  rebounds = 0
-    game_hash.each do | team, team_details|
-      team_details[:players].each do | player_stats |
-        if player_stats[:shoe] > shoes
-          shoes = player_stats[:shoe]
-          rebounds = player_stats[:rebounds]
-        end
+
+shoes = 0
+
+rebounds = 0
+  
+  game_hash.each do | team, team_details|
+    
+    team_details[:players].each do | player_stats |
+      
+      if player_stats[:shoe] > shoes
+        
+        shoes = player_stats[:shoe]
+        
+        rebounds = player_stats[:rebounds]
+      
       end
+    
     end
-  rebounds
+  
+  end
+
+rebounds
+
 end
 
 def iterate_through_players_for(name, statistic)
-  game_hash.each do |_team, game_data|
-    game_data[:players].each do |player|
-      return player[statistic] if player[:player_name] == name
-    end
+game_hash.each do |_team, game_data|
+  game_data[:players].each do |basketball_player|
+    return basketball_player[statistic] if basketball_player[:player_name] == name
   end
+end
 end
 
 def player_with_most_of(statistic)
