@@ -299,43 +299,73 @@ end
 end
 
 def player_with_most_of(statistic)
-  player_ID = nil
-  stat_total = 0
-  game_hash.each do |_team, game_data|
-    game_data[:players].each do |basketball_player|
-      if basketball_player[statistic].is_a? String
-        if basketball_player[statistic].length > stat_total
-          stat_total = basketball_player[statistic].length
-          player_ID = basketball_player[:player_name]
-        end
-      elsif basketball_player[statistic] > stat_total
-        stat_total = basketball_player[statistic]
+
+player_ID = nil
+
+stat_total = 0
+
+game_hash.each do |_team, game_data|
+
+  game_data[:players].each do |basketball_player|
+
+    if basketball_player[statistic].is_a? String
+
+      if basketball_player[statistic].length > stat_total
+
+        stat_total = basketball_player[statistic].length
+
         player_ID = basketball_player[:player_name]
+
       end
+
+    elsif basketball_player[statistic] > stat_total
+
+      stat_total = basketball_player[statistic]
+
+      player_ID = basketball_player[:player_name]
+
     end
+
   end
 
-  player_ID
+end
+
+player_ID
+
 end
 
 def most_points_scored
+
   player_with_most_of(:points)
+
 end
 
 def winning_team
+
   scores = { 'Brooklyn Nets' => 0, 'Charlotte Hornets' => 0 }
+
   game_hash.each do |_team, game_data|
+
     game_data[:players].each do |player|
+
       scores[game_data[:team_name]] += iterate_through_players_for(player[:player_name], :points)
+  
     end
+  
   end
+  
   scores.max_by { |_k, v| v }.first
+
 end
 
 def player_with_longest_name
+
   player_with_most_of(:player_name)
+
 end
 
 def long_name_steals_a_ton?
+
   player_with_most_of(:steals) == player_with_most_of(:player_name)
+
 end
