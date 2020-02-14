@@ -158,11 +158,11 @@ def team_colors(team_name)
 end
 
 def team_names
-  names = []
-  game_hash.each do |place, team|
-    names << team[:team_name]
-  end
-  names
+names = []
+game_hash.each do |place, team|
+  names << team[:team_name]
+end
+names
 end
 
 
