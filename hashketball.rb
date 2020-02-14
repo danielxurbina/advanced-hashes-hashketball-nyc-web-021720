@@ -299,7 +299,7 @@ end
 end
 
 def player_with_most_of(statistic)
-  player_name = nil
+  player_id = nil
   stat_total = 0
   game_hash.each do |_team, game_data|
     game_data[:players].each do |basketball_player|
